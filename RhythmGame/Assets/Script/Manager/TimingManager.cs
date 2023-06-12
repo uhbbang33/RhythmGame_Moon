@@ -17,8 +17,8 @@ public class TimingManager : MonoBehaviour
 
         for (int i = 0; i < timingRect.Length; ++i)
         {
-            timingBoxs[i].Set(Center.localPosition.y - timingRect[i].rect.height / 2, // 최소값: 중심 - (이미지의 너비 / 2)
-                Center.localPosition.y + timingRect[i].rect.height / 2);    // 최대값: 중심 + (이미지의 너비 / 2)
+            timingBoxs[i].Set(Center.localPosition.y - timingRect[i].rect.height / 2, // 최소값: 중심 - (이미지의 높이 / 2)
+                Center.localPosition.y + timingRect[i].rect.height / 2);    // 최대값: 중심 + (이미지의 높이 / 2)
         }
     }
 

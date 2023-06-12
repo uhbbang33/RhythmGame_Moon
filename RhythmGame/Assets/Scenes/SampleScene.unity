@@ -878,6 +878,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1186254867}
   - component: {fileID: 1186254868}
+  - component: {fileID: 1186254869}
   m_Layer: 5
   m_Name: Note Delete Collider
   m_TagString: Note Collider
@@ -931,6 +932,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 80, y: 40}
   m_EdgeRadius: 0
+--- !u!114 &1186254869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1186254866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55f64439a40a87d4abebb6ea73d6b887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1206646680
 GameObject:
   m_ObjectHideFlags: 0
