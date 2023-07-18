@@ -10,11 +10,11 @@ public class NoteManager : MonoBehaviour
     [SerializeField] Transform tfNoteAppear = null;
     [SerializeField] GameObject goNote = null;
 
-    TimingManager timingManger;
+    TimingManager timingManager;
 
     private void Start()
     {
-        timingManger = GetComponent<TimingManager>();
+        timingManager = GetComponent<TimingManager>();
     }
 
     private void Update()
@@ -25,7 +25,7 @@ public class NoteManager : MonoBehaviour
         {
             GameObject t_note = Instantiate(goNote, tfNoteAppear.position, Quaternion.identity);
             t_note.transform.SetParent(this.transform);
-            timingManger.boxNoteList.Add(t_note); //
+            timingManager.boxNoteList.Add(t_note); //
             currentTime -= 60d / bpm;
         }
     }

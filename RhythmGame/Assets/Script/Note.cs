@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class Note : MonoBehaviour
 {
-    public float noteSpeed = 400;
+    public float noteSpeed;
 
     UnityEngine.UI.Image noteImage;
 
     private void Start()
     {
+        noteSpeed = 400;
         noteImage = GetComponent<UnityEngine.UI.Image>();
     }
 
@@ -21,6 +22,11 @@ public class Note : MonoBehaviour
     public void HideNote()
     {
         noteImage.enabled = false;
+    }
+
+    public bool GetNoteFlag()
+    {
+        return noteImage.enabled;
     }
 
 }

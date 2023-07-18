@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class TimingManager : MonoBehaviour
 {
@@ -9,6 +10,10 @@ public class TimingManager : MonoBehaviour
     [SerializeField] Transform Center = null;
     [SerializeField] RectTransform[] timingRect = null;
     Vector2[] timingBoxs = null;
+
+    [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] int[] scoreList;
+    int score = 0;
 
     EffectManager effect;
 
@@ -35,14 +40,21 @@ public class TimingManager : MonoBehaviour
             {
                 if (timingBoxs[j].x <= notePosY && notePosY <= timingBoxs[j].y)
                 {
+                    // 노트 제거
                     boxNoteList[i].GetComponent<Note>().HideNote();
-                    effect.NoteHitEffect();
                     boxNoteList.RemoveAt(i);
-                    Debug.Log("Hit" + j);
+
+                    // 이펙트 연출
+                    if (j < timingBoxs.Length - 1)
+                        effect.NoteHitEffect();
+                    effect.JudgementEffect(j);
+
+                    // score
+                    score += scoreList[j];
+                    scoreText.text = score.ToString();
                     return;
                 }
             }
         }
-        Debug.Log("Miss");
     }
 }
