@@ -23,10 +23,10 @@ public class NoteManager : MonoBehaviour
         
         if(currentTime >= 60d / bpm)
         {
-            GameObject t_note = Instantiate(goNote, tfNoteAppear.position, Quaternion.identity);
-            t_note.transform.SetParent(this.transform);
-            timingManager.boxNoteList.Add(t_note); //
-            currentTime -= 60d / bpm;
+            //GameObject t_note = Instantiate(goNote, tfNoteAppear.position, Quaternion.identity);
+            //t_note.transform.SetParent(this.transform);
+            //timingManager.boxNoteList.Add(t_note); //
+            //currentTime -= 60d / bpm;
         }
     }
 }

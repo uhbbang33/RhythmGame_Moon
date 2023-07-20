@@ -1,40 +1,51 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.IO;
 
 public class ReadFile : MonoBehaviour
 {
-    TextAsset txt;
-    string noteFileToString;
+    [SerializeField] TextAsset txt;
+    [SerializeField] int lineNum;
+    [SerializeField] List<Transform> noteAppearLocation;
+    [SerializeField] GameObject notePrefab;
+    [SerializeField] GameObject noteParent;
+
+    string txtToString;
+    string oneLine;
 
     void Start()
     {
-        txt = Resources.Load<TextAsset>("Text.txt");
-        noteFileToString = ReadText("text.txt");
-        Debug.Log(noteFileToString);
-    }
-    
-    void Update()
-    {
-        
+        txtToString = txt.ToString();
+        InvokeRepeating("readOneLine", 0, 10f * Time.deltaTime);
     }
 
-    string ReadText(string filePath)
+    void readOneLine()
     {
-        FileInfo fileInfo = new FileInfo(filePath);
-        string value = "";
-
-        if (fileInfo.Exists) // 파일 존재 여부
+        int i = 0;
+        while (i < lineNum)
         {
-            StreamReader reader = new StreamReader(filePath);
-            value = reader.ReadToEnd();
-            reader.Close();
+            oneLine += txtToString[i];
+            ++i;
         }
-        else
-            value = "파일이 없습니다.";
+        // 2는 문자열 뒤의 공백과 \n을 제거하기 위한 숫자
+        txtToString = txtToString.Remove(0, lineNum + 2);
 
+        CreateNote();
 
-        return value;
+        Debug.Log(oneLine);
+        oneLine = "";
     }
+
+    void CreateNote()
+    {
+        for (int i = 0; i < oneLine.Length; ++i)
+        {
+            if (oneLine[i] == '1')
+            {
+                GameObject note = Instantiate(notePrefab, noteAppearLocation[i].position, Quaternion.identity);
+                note.transform.SetParent(noteParent.transform);
+            }
+        }
+    }
+
 }
