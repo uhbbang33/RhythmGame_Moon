@@ -31,7 +31,7 @@ public class TimingManager : MonoBehaviour
         }
     }
 
-    public void CheckTiming()
+    public void CheckTiming(int noteLocationNum)
     {
         for (int i = 0; i < boxNoteList.Count; ++i)
         {

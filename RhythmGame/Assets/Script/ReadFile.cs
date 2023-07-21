@@ -6,9 +6,11 @@ public class ReadFile : MonoBehaviour
 {
     [SerializeField] TextAsset txtFile;
     [SerializeField] int lineNum;
-    [SerializeField] List<Transform> noteAppearLocation;
+    [SerializeField] List<GameObject> noteAppearLocation;
     [SerializeField] GameObject notePrefab;
-    [SerializeField] GameObject noteParent;
+    //[SerializeField] List<GameObject> noteParent;
+
+    [SerializeField] TimingManager timingManager;
 
     string txtToString;
     string oneLine;
@@ -46,8 +48,9 @@ public class ReadFile : MonoBehaviour
         {
             if (oneLine[i] == generateNoteNum)
             {
-                GameObject note = Instantiate(notePrefab, noteAppearLocation[i].position, Quaternion.identity);
-                note.transform.SetParent(noteParent.transform);
+                GameObject note = Instantiate(notePrefab, noteAppearLocation[i].transform.position, Quaternion.identity);
+                note.transform.SetParent(noteAppearLocation[i].transform);
+                timingManager.boxNoteList.Add(note);
             }
         }
     }

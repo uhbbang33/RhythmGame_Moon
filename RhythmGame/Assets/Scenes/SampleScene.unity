@@ -1339,7 +1339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62b4a3cfa9234c4d90c638751cd463e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  txt: {fileID: 4900000, guid: a46131d2ef0883944819a7b343674316, type: 3}
+  txtFile: {fileID: 4900000, guid: a46131d2ef0883944819a7b343674316, type: 3}
   lineNum: 6
   noteAppearLocation:
   - {fileID: 2031891406}
@@ -1973,8 +1973,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bpm: 120
-  tfNoteAppear: {fileID: 2031891406}
-  goNote: {fileID: 9181562868647523092, guid: 9943d551cccb88146b038c56eb72c181, type: 3}
 --- !u!114 &1513501855
 MonoBehaviour:
   m_ObjectHideFlags: 0

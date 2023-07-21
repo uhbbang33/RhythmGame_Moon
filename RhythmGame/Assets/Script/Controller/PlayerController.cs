@@ -11,13 +11,20 @@ public class PlayerController : MonoBehaviour
         timingManager = FindObjectOfType<TimingManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // 판정 체크
         if (Input.GetKeyDown(KeyCode.S))
-        {
-            // 판정 체크
-            timingManager.CheckTiming();
-        }
+            timingManager.CheckTiming(0);
+        if (Input.GetKeyDown(KeyCode.D))
+            timingManager.CheckTiming(1);
+        if (Input.GetKeyDown(KeyCode.F))
+            timingManager.CheckTiming(2);
+        if (Input.GetKeyDown(KeyCode.J))
+            timingManager.CheckTiming(3);
+        if (Input.GetKeyDown(KeyCode.K))
+            timingManager.CheckTiming(4);
+        if (Input.GetKeyDown(KeyCode.L))
+            timingManager.CheckTiming(5);
     }
 }
