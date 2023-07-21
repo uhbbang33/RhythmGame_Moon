@@ -7,14 +7,14 @@ public class NoteManager : MonoBehaviour
     public int bpm = 0;
     double currentTime = 0d;
 
-    [SerializeField] Transform tfNoteAppear = null;
-    [SerializeField] GameObject goNote = null;
+    //[SerializeField] Transform tfNoteAppear = null;
+    //[SerializeField] GameObject goNote = null;
 
-    TimingManager timingManager;
+    //TimingManager timingManager;
 
     private void Start()
     {
-        timingManager = GetComponent<TimingManager>();
+        //timingManager = GetComponent<TimingManager>();
     }
 
     private void Update()

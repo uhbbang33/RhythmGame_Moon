@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ReadFile : MonoBehaviour
 {
-    [SerializeField] TextAsset txt;
+    [SerializeField] TextAsset txtFile;
     [SerializeField] int lineNum;
     [SerializeField] List<Transform> noteAppearLocation;
     [SerializeField] GameObject notePrefab;
@@ -13,10 +13,12 @@ public class ReadFile : MonoBehaviour
     string txtToString;
     string oneLine;
 
+    char generateNoteNum = '1';
+
     void Start()
     {
-        txtToString = txt.ToString();
-        InvokeRepeating("readOneLine", 0, 10f * Time.deltaTime);
+        txtToString = txtFile.ToString();
+        InvokeRepeating("readOneLine", 0, 10f * Time.deltaTime);    // 임시
     }
 
     void readOneLine()
@@ -27,20 +29,22 @@ public class ReadFile : MonoBehaviour
             oneLine += txtToString[i];
             ++i;
         }
-        // 2는 문자열 뒤의 공백과 \n을 제거하기 위한 숫자
-        txtToString = txtToString.Remove(0, lineNum + 2);
+        txtToString = txtToString.Remove(0, lineNum);
 
         CreateNote();
-
-        Debug.Log(oneLine);
         oneLine = "";
+
+        if (txtToString.Length <= 2)
+            CancelInvoke();
+        else
+            txtToString = txtToString.Remove(0, 2);
     }
 
     void CreateNote()
     {
         for (int i = 0; i < oneLine.Length; ++i)
         {
-            if (oneLine[i] == '1')
+            if (oneLine[i] == generateNoteNum)
             {
                 GameObject note = Instantiate(notePrefab, noteAppearLocation[i].position, Quaternion.identity);
                 note.transform.SetParent(noteParent.transform);
