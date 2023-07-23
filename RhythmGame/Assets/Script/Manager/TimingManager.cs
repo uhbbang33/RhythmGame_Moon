@@ -7,18 +7,20 @@ public class TimingManager : MonoBehaviour
 {
     int score = 0;
     static int lineMaxNum = 6;
-    public List<GameObject>[] boxNoteList = new List<GameObject>[lineMaxNum];
+    public List<GameObject>[] boxNoteList;
 
-    [SerializeField] Transform Center = null;
-    [SerializeField] RectTransform[] timingRect = null;
+    [SerializeField] Transform Center;
+    [SerializeField] RectTransform[] timingRect;
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] int[] scoreList;
 
-    Vector2[] timingBoxs = null;
+    Vector2[] timingBoxs;
     EffectManager effect;
 
     void Start()
     {
+        boxNoteList = new List<GameObject>[lineMaxNum];
+
         for (int i = 0; i < lineMaxNum; ++i)
             boxNoteList[i] = new List<GameObject>();
 
@@ -31,6 +33,9 @@ public class TimingManager : MonoBehaviour
         {
             timingBoxs[i].Set(Center.localPosition.y - timingRect[i].rect.height / 2, // 최소값: 중심 - (이미지의 높이 / 2)
                 Center.localPosition.y + timingRect[i].rect.height / 2);    // 최대값: 중심 + (이미지의 높이 / 2)
+
+            Debug.Log("timing Box x: " + timingBoxs[i].x);
+            Debug.Log("timing Box y: " + timingBoxs[i].y);
         }
     }
 
@@ -38,7 +43,12 @@ public class TimingManager : MonoBehaviour
     {
         for (int i = 0; i < boxNoteList[noteLocationNum].Count; ++i)    // 나중에 없애야 할듯??
         {
-            float notePosY = boxNoteList[noteLocationNum][i].transform.localPosition.y;
+            float notePosY 
+                = boxNoteList[noteLocationNum][i].transform.localPosition.y 
+                + boxNoteList[noteLocationNum][i].transform.parent.localPosition.y; // parent.position 영향을 없애기 위한 코드
+            
+            Debug.Log("notePosY: " + notePosY);
+            
             for (int j = 0; j < timingBoxs.Length; ++j)
             {
                 if (timingBoxs[j].x <= notePosY && notePosY <= timingBoxs[j].y)
