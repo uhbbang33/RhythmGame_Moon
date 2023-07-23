@@ -5,20 +5,23 @@ using TMPro;
 
 public class TimingManager : MonoBehaviour
 {
-    public List<GameObject> boxNoteList = new List<GameObject>();
+    int score = 0;
+    static int lineMaxNum = 6;
+    public List<GameObject>[] boxNoteList = new List<GameObject>[lineMaxNum];
 
     [SerializeField] Transform Center = null;
     [SerializeField] RectTransform[] timingRect = null;
-    Vector2[] timingBoxs = null;
-
     [SerializeField] TextMeshProUGUI scoreText;
     [SerializeField] int[] scoreList;
-    int score = 0;
 
+    Vector2[] timingBoxs = null;
     EffectManager effect;
 
     void Start()
     {
+        for (int i = 0; i < lineMaxNum; ++i)
+            boxNoteList[i] = new List<GameObject>();
+
         effect = FindObjectOfType<EffectManager>();
 
         // 타이밍 박스 설정
@@ -33,16 +36,16 @@ public class TimingManager : MonoBehaviour
 
     public void CheckTiming(int noteLocationNum)
     {
-        for (int i = 0; i < boxNoteList.Count; ++i)
+        for (int i = 0; i < boxNoteList[noteLocationNum].Count; ++i)    // 나중에 없애야 할듯??
         {
-            float notePosY = boxNoteList[i].transform.localPosition.y;
+            float notePosY = boxNoteList[noteLocationNum][i].transform.localPosition.y;
             for (int j = 0; j < timingBoxs.Length; ++j)
             {
                 if (timingBoxs[j].x <= notePosY && notePosY <= timingBoxs[j].y)
                 {
                     // 노트 제거
-                    boxNoteList[i].GetComponent<Note>().HideNote();
-                    boxNoteList.RemoveAt(i);
+                    boxNoteList[noteLocationNum][i].GetComponent<Note>().HideNote();
+                    boxNoteList[noteLocationNum].RemoveAt(i);
 
                     // 이펙트 연출
                     if (j < timingBoxs.Length - 1)

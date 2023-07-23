@@ -6,19 +6,18 @@ public class ReadFile : MonoBehaviour
 {
     [SerializeField] TextAsset txtFile;
     [SerializeField] int lineNum;
-    [SerializeField] List<GameObject> noteAppearLocation;
-    [SerializeField] GameObject notePrefab;
-    //[SerializeField] List<GameObject> noteParent;
-
     [SerializeField] TimingManager timingManager;
+
+    NoteManager noteManager;
 
     string txtToString;
     string oneLine;
 
-    char generateNoteNum = '1';
 
     void Start()
     {
+        noteManager = GameObject.Find("Note").GetComponent<NoteManager>();
+
         txtToString = txtFile.ToString();
         InvokeRepeating("readOneLine", 0, 10f * Time.deltaTime);    // юс╫ц
     }
@@ -33,26 +32,13 @@ public class ReadFile : MonoBehaviour
         }
         txtToString = txtToString.Remove(0, lineNum);
 
-        CreateNote();
+        noteManager.CreateNote(oneLine);
+
         oneLine = "";
 
         if (txtToString.Length <= 2)
             CancelInvoke();
         else
-            txtToString = txtToString.Remove(0, 2);
+            txtToString = txtToString.Remove(0, 2); // remove \n, NULL
     }
-
-    void CreateNote()
-    {
-        for (int i = 0; i < oneLine.Length; ++i)
-        {
-            if (oneLine[i] == generateNoteNum)
-            {
-                GameObject note = Instantiate(notePrefab, noteAppearLocation[i].transform.position, Quaternion.identity);
-                note.transform.SetParent(noteAppearLocation[i].transform);
-                timingManager.boxNoteList.Add(note);
-            }
-        }
-    }
-
 }

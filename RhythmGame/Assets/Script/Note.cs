@@ -5,6 +5,7 @@ using UnityEngine;
 public class Note : MonoBehaviour
 {
     public float noteSpeed;
+    public int noteLineNum;
 
     UnityEngine.UI.Image noteImage;
 
