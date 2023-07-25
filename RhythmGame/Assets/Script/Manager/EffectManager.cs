@@ -4,33 +4,28 @@ using UnityEngine;
 
 public class EffectManager : MonoBehaviour
 {
-    [SerializeField] Animator noteHitAnimator;
+    [SerializeField] Animator[] noteHitAnimator;
     string hit;
+    string judgementHit;
 
     [SerializeField] Animator judgementAnimator;
     [SerializeField] UnityEngine.UI.Image judgementImage;
     [SerializeField] Sprite[] judgementSprite;
 
-    public void NoteHitEffect()
+    void Start()
     {
-        noteHitAnimator.SetTrigger(hit);
+        hit = "Hit";
+        judgementHit = "Hit";
+    }
+
+    public void NoteHitEffect(int lineNum)
+    {
+        noteHitAnimator[lineNum].SetTrigger(hit);
     }
 
     public void JudgementEffect(int num)
     {
         judgementImage.sprite = judgementSprite[num];
-        judgementAnimator.SetTrigger(hit);
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        hit = "Hit";
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        judgementAnimator.SetTrigger(judgementHit);
     }
 }

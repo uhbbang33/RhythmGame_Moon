@@ -6,7 +6,7 @@ using TMPro;
 public class TimingManager : MonoBehaviour
 {
     int score = 0;
-    static int lineMaxNum = 6;
+    int lineMaxNum = 6;  // static?
     public List<GameObject>[] boxNoteList;
 
     [SerializeField] Transform Center;
@@ -33,9 +33,6 @@ public class TimingManager : MonoBehaviour
         {
             timingBoxs[i].Set(Center.localPosition.y - timingRect[i].rect.height / 2, // 최소값: 중심 - (이미지의 높이 / 2)
                 Center.localPosition.y + timingRect[i].rect.height / 2);    // 최대값: 중심 + (이미지의 높이 / 2)
-
-            Debug.Log("timing Box x: " + timingBoxs[i].x);
-            Debug.Log("timing Box y: " + timingBoxs[i].y);
         }
     }
 
@@ -47,8 +44,6 @@ public class TimingManager : MonoBehaviour
                 = boxNoteList[noteLocationNum][i].transform.localPosition.y 
                 + boxNoteList[noteLocationNum][i].transform.parent.localPosition.y; // parent.position 영향을 없애기 위한 코드
             
-            Debug.Log("notePosY: " + notePosY);
-            
             for (int j = 0; j < timingBoxs.Length; ++j)
             {
                 if (timingBoxs[j].x <= notePosY && notePosY <= timingBoxs[j].y)
@@ -59,7 +54,7 @@ public class TimingManager : MonoBehaviour
 
                     // 이펙트 연출
                     if (j < timingBoxs.Length - 1)
-                        effect.NoteHitEffect();
+                        effect.NoteHitEffect(noteLocationNum);
                     effect.JudgementEffect(j);
 
                     // score
