@@ -9,7 +9,7 @@ public class NoteManager : MonoBehaviour
     
     TimingManager timingManager;
 
-    public int bpm = 0;
+    [SerializeField] public int bpm;
     double currentTime = 0d;
     char generateNoteNum = '1';
 
@@ -21,7 +21,7 @@ public class NoteManager : MonoBehaviour
     private void Update()
     {
         currentTime += Time.deltaTime;
-        
+
         if(currentTime >= 60d / bpm)
         {
             //GameObject t_note = Instantiate(goNote, tfNoteAppear.position, Quaternion.identity);
@@ -39,15 +39,14 @@ public class NoteManager : MonoBehaviour
             {
                 GameObject note = Instantiate(notePrefab, noteAppearLocation[i].transform.position, Quaternion.identity);
                 note.transform.SetParent(noteAppearLocation[i].transform);  // note의 parent position 수정해야함
-                
                 note.GetComponent<Note>().noteLineNum = i;
+
+                timingManager.boxNoteList[i].Add(note);
 
                 //RectTransform noteRectTransform = note.GetComponent<RectTransform>();
                 //noteRectTransform.anchorMin = new Vector2(0.0f, 1.0f);
                 //noteRectTransform.anchorMax = new Vector2(0.0f, 1.0f);
                 //noteRectTransform.pivot = new Vector2(0.0f, 0.5f);
-
-                timingManager.boxNoteList[i].Add(note);
             }
         }
     }
